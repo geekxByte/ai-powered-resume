@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn PDF to HTML Resume Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>LinkedIn PDF to HTML Resume Converter</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload LinkedIn PDF:</label>
+                <input type="file" id="file" name="pdf_file" accept=".pdf" required>
+            </div>
+            <div class="form-group">
+                <label for="api_key">OpenAI API Key</label>
+                <input type="password" id="api_key" name="api_key">
+            </div>
+            <button type="submit">Generate HTML Resume</button>
+        </form>
+        
+        <p class="note">
+            Note: Providing an OpenAI API key will attempt to generate an AI-powered resume. Otherwise, a simple HTML resume will be generated.
+        </p>
+    </div>
+</body>
+</html>
